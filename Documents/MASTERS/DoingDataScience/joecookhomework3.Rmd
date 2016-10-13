@@ -1,0 +1,91 @@
+---
+title: "joecookhomework3"
+author: "Joseph Cook"
+date: "October 12, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Question 1
+```{r question1}
+testdata <- c(45.4,44.2,36.8,35.1,39.0,60.0,47.4,41.1,45.8,35.6)
+#a
+sd(testdata[testdata<45])
+#b
+sum(testdata<45)
+#c
+sum(testdata>40&testdata<55)
+#d
+sum(testdata>40)/length(testdata)
+```
+
+# Question 2
+```{r question2}
+cigsales <- read.table("cigsales.txt",header=TRUE)
+#a
+cigsales$state[which(cigsales$black>15.0)]
+price.vec <- cigsales$price
+poor <- cigsales$income[which(cigsales$income<median(cigsales$income))]
+rich <- cigsales$income[which(cigsales$income>median(cigsales$income))]
+```
+
+# Question 3
+```{r question3}
+#a
+trim <- function(x, lower = 0.0, upper = 1.0) {
+ indicies <- x >= lower & x <= upper
+ return(x[indicies])
+}
+#This function takes a vector and returns which values are greater than the lower parameter (0 by default) and less than the upper parameter which is 1 by default.  It uses a vector called indicies which stores the index that fit those parameters and then uses that index to return the values that fit the parameters.
+
+#b
+trim <- function(x, lower = 0.0, upper = 1.0) x[x >= lower & x <= upper]
+#This function returns the same value as the first function.  However it does not use a vector to store the indicies.  It creates a logical that returns all the true values of the parameters.
+
+#c
+sumdice <- function(n) {
+k <- sample(1:6, size=n, replace=TRUE)
+return(sum(k))
+}
+#this returns the sum of a random sample n numbers between 1 and 6.  In the sample function uses the n parameter from the function to determine the sample size.  The replace parameter has been set to true which means the same value can be used over and over again.  The values are stored in the vector k and then the sum of k is returned.
+```
+
+# Question 4
+``` {r question4}
+n <- 10000
+sumdice(n)/n
+#The answer is 3.5 dots on a fair die is what you would expect to see.
+```
+
+# Question 5
+```{r question5}
+x <- 42
+fred <- function(y) {
+ x <- y
+ return(y + x)
+ }
+fred(13)
+#The y and x variable are the same inside the function.  The function sets them to be equal.  However if you ask for x outside of the function it will still return 42.  Thats how the function returns 26 but if you added y and x outside of the function you would get 55.
+```
+
+# Question 6
+```{r question6}
+diff <- function(x) {
+abs(mean(x)-median(x))  
+}
+diff(price.vec)
+```
+
+# Question 7
+```{r question7}
+for (i in 1:20) {
+print(i+3)
+}
+#The loop adds 3 to each value in the loop and returns that value.  By value I mean each number between 1 and 20.
+```
+
+
+
+
